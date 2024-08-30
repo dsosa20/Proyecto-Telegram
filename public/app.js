@@ -3,19 +3,17 @@ import { getFirestore, collection, query, orderBy, onSnapshot } from "firebase/f
 // Inicializa Firestore
 const db = getFirestore();
 
-const gallery = document.getElementById('photo-gallery');
+// Referencia a la colección en Firestore
+const photoGallery = document.getElementById('photo-gallery');
+const photosRef = collection(db, 'alarm_photos');
+const photosQuery = query(photosRef, orderBy('timestamp', 'desc'));
 
-// Configura la consulta para obtener las imágenes de Firestore
-const q = query(collection(db, 'alarm_photos'), orderBy('timestamp', 'desc'));
-
-// Escucha en tiempo real para obtener las imágenes
-onSnapshot(q, (snapshot) => {
-    gallery.innerHTML = ''; // Limpiar la galería
+onSnapshot(photosQuery, (snapshot) => {
+    photoGallery.innerHTML = ''; // Limpiar la galería
     snapshot.forEach((doc) => {
-        const data = doc.data();
-        const img = document.createElement('img');
-        img.src = data.url;
-        img.alt = 'Imagen del Bot de Telegram';
-        gallery.appendChild(img);
+        const photo = doc.data();
+        const imgElement = document.createElement('img');
+        imgElement.src = photo.url;
+        photoGallery.appendChild(imgElement);
     });
 });
