@@ -1,8 +1,7 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Permite la lectura y escritura en la colección "images" sin autenticación
-    match /images/{imageId} {
-      allow read, write: if true;
+    match /alarm_photos/{document=**} {
+      allow read, write: if true; // Ajusta según sea necesario
     }
   }
 }

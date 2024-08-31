@@ -1,8 +1,7 @@
 service firebase.storage {
   match /b/{bucket}/o {
-    // Permitir la lectura y escritura en el bucket sin autenticación
     match /{allPaths=**} {
-      allow read, write: if true;
+      allow read, write: if true; // Ajusta según sea necesario
     }
   }
 }
