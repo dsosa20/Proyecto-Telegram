@@ -1,11 +1,8 @@
-// Import the functions you need from the SDKs you need
+// src/firebase-config.js
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Tu configuración de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCddqCOWH1ztpnrx5x4RnH-0E3fVsyKOZA",
   authDomain: "proyecto-telegram-68994.firebaseapp.com",
@@ -16,6 +13,9 @@ const firebaseConfig = {
   measurementId: "G-S4NKCTLVQQ"
 };
 
-// Initialize Firebase
+// Inicializa Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+// Exporta la instancia de Firebase y la configuración
+export { app, firebaseConfig };
