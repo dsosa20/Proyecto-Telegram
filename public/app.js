@@ -8,7 +8,7 @@ const db = getFirestore(app);
 // Referencia a la colección en Firestore
 const photoGallery = document.getElementById('photo-gallery');
 const photosRef = collection(db, 'alarm_photos');
-const photosQuery = query(photosRef, orderBy('timestamp', 'desc'));
+const photosQuery = query(photosRef, orderBy('createdAt', 'desc')); // Asegúrate de que 'createdAt' coincide con el nombre del campo en Firestore
 
 // Escucha los cambios en Firestore y actualiza la galería
 onSnapshot(photosQuery, (snapshot) => {
@@ -16,7 +16,7 @@ onSnapshot(photosQuery, (snapshot) => {
   snapshot.forEach((doc) => {
     const photo = doc.data();
     const imgElement = document.createElement('img');
-    imgElement.src = photo.url;
+    imgElement.src = photo.photoUrl; // Asegúrate de que 'photoUrl' coincide con el nombre del campo en Firestore
     photoGallery.appendChild(imgElement);
   });
 });

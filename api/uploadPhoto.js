@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
             const buffer = await response.buffer();
 
             // Crear un nombre único para la foto
-            const fileName = `${telegramId}/${uuidv4()}.jpg`;
+            const fileName = `${telegramId}/${uuidv4()}.jpg`; // Corregido con comillas invertidas para interpolación
 
             // Subir la foto a Firebase Storage
             const file = bucket.file(fileName);
