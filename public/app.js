@@ -1,4 +1,3 @@
-// public/app.js
 import { getFirestore, collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { app } from './src/firebase-config.js'; // Importa la instancia de Firebase
 
@@ -15,8 +14,13 @@ onSnapshot(photosQuery, (snapshot) => {
   photoGallery.innerHTML = ''; // Limpiar la galería
   snapshot.forEach((doc) => {
     const photo = doc.data();
-    const imgElement = document.createElement('img');
-    imgElement.src = photo.photoUrl; // Asegúrate de que 'photoUrl' coincide con el nombre del campo en Firestore
-    photoGallery.appendChild(imgElement);
+    console.log('Photo data:', photo); // Verifica los datos recibidos
+    if (photo.url) { // Usa el campo correcto
+      const imgElement = document.createElement('img');
+      imgElement.src = photo.url; // Usa `url` como fuente
+      photoGallery.appendChild(imgElement);
+    } else {
+      console.error('No url found in document:', doc.id);
+    }
   });
 });
